@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. scripts/cmd-divider.sh
+
+echo "\n📝 Running commit-msg hook..."
+npx --no -- commitlint --edit $1
+cmd_divider

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. scripts/cmd-divider.sh
+
+echo "\n🚀 Running pre-push hook..."
+# pnpm run test
+cmd_divider

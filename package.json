@@ -4,15 +4,30 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "test": "turbo test",
+    "test:watch": "turbo test:watch",
+    "lint:fix": "turbo lint:fix",
+    "lint:check": "turbo lint:check",
+    "clean": "turbo clean; rm -rf ./node_modules; rm -f pnpm-lock.yaml",
+    "clean:build": "turbo clean:build",
+    "clean:install": "pnpm clean; pnpm install",
+    "@server": "pnpm --filter server",
+    "@web": "pnpm --filter web",
+    "@linting": "pnpm --filter linting-config",
+    "@model": "pnpm --filter model",
+    "pre-commit": "lint-staged",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "shell-quote": "^1.8.1",
     "turbo": "^2.1.1",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.0.6",
   "engines": {
     "node": ">=18"
   }

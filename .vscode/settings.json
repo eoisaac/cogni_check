@@ -1,7 +1,12 @@
 {
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ]
+  "material-icon-theme.activeIconPack": "nest",
+  "material-icon-theme.files.associations": {
+    "vitest.config.e2e.ts": "vitest"
+  },
+  "material-icon-theme.folders.associations": {
+    "linting-config": "custom",
+    "training": "plugin"
+  },
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "cSpell.words": ["tensorflow", "tfjs"]
 }
