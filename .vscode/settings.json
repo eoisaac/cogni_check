@@ -8,5 +8,5 @@
     "training": "plugin"
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
-  "cSpell.words": ["commitlint", "tensorflow", "tfjs"]
+  "cSpell.words": ["commitlint", "tailwindcss", "tensorflow", "tfjs"]
 }

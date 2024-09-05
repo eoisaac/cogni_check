@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CogniCheck</title>
+  </head>
+  <body>
+    <main id="app" class="h-screen bg-slate-900 grid place-items-center p-4">
+      <article
+        class="bg-[#2e1065] flex flex-col w-full max-w-sm rounded-xl shadow-sm"
+      >
+        <h1
+          class="uppercase py-2 text-center text-slate-50 text-lg font-medium"
+        >
+          CogniCheck
+        </h1>
+
+        <form
+          id="form"
+          class="flex-1 rounded-xl bg-slate-50 px-8 py-16 gap-4 flex flex-col items-center"
+        >
+          <label
+            class="w-full bg-[#6d5ec9] h-24 rounded-xl grid place-items-center"
+          >
+            <i data-lucide="CloudUpload" class="text-[#270172]"></i>
+            <input
+              type="file"
+              class="hidden"
+              name="image-inpt"
+              id="image-inpt"
+            />
+          </label>
+
+          <p class="text-center uppercase text-sm font-medium">
+            Faça o envio de uma imagem para análise
+          </p>
+          <button class="border border-[#270172] py-2 px-4 rounded-xl">
+            Enviar
+          </button>
+        </form>
+      </article>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
