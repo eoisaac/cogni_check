@@ -1,22 +1,25 @@
 {
-  "name": "web",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+  "dependencies": {
+    "axios": "^1.7.7",
+    "lucide": "^0.433.0"
   },
   "devDependencies": {
+    "@repo/linting-config": "workspace:*",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.3",
     "vite": "^5.4.1"
   },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "lucide": "^0.433.0"
-  }
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "lint:check": "eslint --ext .ts && prettier --check \"src/**/*.ts\" ",
+    "lint:fix": "eslint --ext .ts --fix && prettier --write \"src/**/*.ts\"",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "0.0.0"
 }

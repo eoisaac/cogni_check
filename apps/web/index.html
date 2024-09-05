@@ -16,29 +16,55 @@
           CogniCheck
         </h1>
 
-        <form
-          id="form"
-          class="flex-1 rounded-xl bg-slate-50 px-8 py-16 gap-4 flex flex-col items-center"
-        >
-          <label class="w-full space-y-4 cursor-pointer">
-            <div class="bg-[#6d5ec9] w-full rounded-xl h-24">
-              <i data-lucide="CloudUpload" class="text-[#270172]"></i>
-              <input
-                type="file"
-                class="hidden"
-                name="image-file"
-                id="image-file"
-              />
-            </div>
-            <p class="text-center uppercase text-sm font-medium">
-              Faça o envio de uma imagem para análise
-            </p>
-          </label>
+        <div
+          id="toast"
+          class="hidden bg-red-500 text-white p-2 rounded mb-4 mx-4 text-center"
+        ></div>
 
-          <button class="border border-[#270172] py-2 px-4 rounded-xl">
-            Enviar
-          </button>
-        </form>
+        <div
+          class="flex-1 rounded-xl bg-slate-50 px-8 py-16 gap-4 flex flex-col"
+        >
+          <form id="form" class="flex-1 gap-4 flex flex-col items-center">
+            <label class="w-full space-y-4 cursor-pointer">
+              <div
+                class="bg-[#6d5ec9] w-full rounded-xl h-24 flex justify-center items-center"
+              >
+                <i data-lucide="CloudUpload" class="text-[#270172]"></i>
+                <input
+                  type="file"
+                  class="hidden"
+                  name="image-file"
+                  id="image-file"
+                />
+              </div>
+              <p class="text-center uppercase text-sm font-medium">
+                Selecionar imagem para análise
+              </p>
+            </label>
+
+            <button
+              id="submit-btn"
+              class="border border-[#270172] py-2 px-4 rounded-xl hover:bg-[#6d5ec9] transition-colors hover:text-slate-50"
+            >
+              Enviar
+            </button>
+          </form>
+
+          <div id="result" class="hidden mt-4 text-center">
+            <img
+              id="uploaded-image"
+              class="w-32 h-32 rounded-xl mx-auto mb-4 border border-[#270172] shadow-sm"
+              alt="Uploaded Image"
+            />
+            <p id="prediction-result"></p>
+            <button
+              id="upload-another-btn"
+              class="mt-4 border border-[#270172] py-2 px-4 rounded-xl hover:bg-[#6d5ec9] transition-colors hover:text-slate-50"
+            >
+              Enviar outra imagem
+            </button>
+          </div>
+        </div>
       </article>
     </main>
 
