@@ -20,21 +20,21 @@
           id="form"
           class="flex-1 rounded-xl bg-slate-50 px-8 py-16 gap-4 flex flex-col items-center"
         >
-          <label
-            class="w-full bg-[#6d5ec9] h-24 rounded-xl grid place-items-center"
-          >
-            <i data-lucide="CloudUpload" class="text-[#270172]"></i>
-            <input
-              type="file"
-              class="hidden"
-              name="image-inpt"
-              id="image-inpt"
-            />
+          <label class="w-full space-y-4 cursor-pointer">
+            <div class="bg-[#6d5ec9] w-full rounded-xl h-24">
+              <i data-lucide="CloudUpload" class="text-[#270172]"></i>
+              <input
+                type="file"
+                class="hidden"
+                name="image-file"
+                id="image-file"
+              />
+            </div>
+            <p class="text-center uppercase text-sm font-medium">
+              Faça o envio de uma imagem para análise
+            </p>
           </label>
 
-          <p class="text-center uppercase text-sm font-medium">
-            Faça o envio de uma imagem para análise
-          </p>
           <button class="border border-[#270172] py-2 px-4 rounded-xl">
             Enviar
           </button>

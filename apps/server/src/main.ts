@@ -1,3 +1,4 @@
+import cors from '@fastify/cors'
 import { predictImage } from '@repo/model'
 import Fastify from 'fastify'
 
@@ -5,14 +6,20 @@ const fastify = Fastify({
   logger: false,
 })
 
+fastify.register(cors)
+
+interface PredictBody {
+  image: string
+}
+
 fastify.post('/predict', async (request, reply) => {
   try {
-    const { imageBase64 } = request.body as { imageBase64: string }
+    const body = request.body as PredictBody
 
-    if (!imageBase64)
+    if (!body.image)
       return reply.status(400).send({ error: 'No image provided' })
 
-    const prediction = await predictImage(imageBase64)
+    const prediction = await predictImage(body.image)
 
     return { prediction }
   } catch (err) {

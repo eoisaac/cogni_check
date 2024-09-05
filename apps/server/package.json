@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@fastify/cors": "^9.0.1",
     "@repo/model": "workspace:*",
     "fastify": "^4.28.1"
   },
