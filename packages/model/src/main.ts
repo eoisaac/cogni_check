@@ -28,10 +28,12 @@ export const predictImage = async (imageBase64: string) => {
 
   const predictionArray = predictions.arraySync() as number[][]
   const probability = predictionArray[0][0]
+
   const predictedClass = probability > 0.5 ? 1 : 0
+  const precision = (Math.abs(0.5 - probability) * 2 * 100).toFixed(2)
 
   return {
-    probability,
+    precision: `${precision}%`,
     predictedClass: classMap[predictedClass],
   }
 }

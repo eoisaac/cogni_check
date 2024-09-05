@@ -12,13 +12,14 @@ const uploadedImage = document.getElementById(
   'uploaded-image',
 ) as HTMLImageElement
 const predictionResult = document.getElementById('prediction-result')!
+const predictionPrecision = document.getElementById('prediction-precision')!
 const uploadAnotherBtn = document.getElementById('upload-another-btn')!
 
 const IMAGE_FILE_TYPES = ['image/png', 'image/jpeg', 'image/jpg']
 
 interface PredictResponse {
   prediction: {
-    probability: number
+    precision: string
     predictedClass: string
   }
 }
@@ -69,7 +70,8 @@ const handleFormSubmit = async (e: Event) => {
     const result = await doPredictReq(fileBase64)
 
     uploadedImage.src = fileBase64
-    predictionResult.textContent = `Classe: ${result.prediction.predictedClass}, Probabilidade: ${result.prediction.probability}`
+    predictionResult.textContent = `Classe: ${result.prediction.predictedClass}`
+    predictionPrecision.textContent = `Precisão aproximada: ${result.prediction.precision}`
     form.classList.add('hidden')
     resultDiv.classList.remove('hidden')
   } catch (error) {

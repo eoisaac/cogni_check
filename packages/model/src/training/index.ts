@@ -20,7 +20,7 @@ const TRAINING_CONFIG = {
   imageDimension: [IMAGE_SIZE, IMAGE_SIZE] as [number, number],
   kernelSize: 3,
   batchSize: 32,
-  epochs: 20,
+  epochs: 100,
 }
 
 const processImageWithJimp = async (imageBuffer: Buffer) => {
@@ -55,14 +55,6 @@ const processImage = async (imageBuffer: Buffer) => {
   )
 }
 
-// const processImage = (imageBuffer: Buffer) => {
-//   return tf.node
-//     .decodeImage(imageBuffer)
-//     .resizeBilinear(TRAINING_CONFIG.imageDimension)
-//     .toFloat()
-//     .div(tf.scalar(255.0))
-// }
-
 const loadTrainingData = async (dirPath: string, label: number) => {
   console.log(chalk.yellow(`📂 Loading images from ${dirPath}...`))
   const files = fs.readdirSync(dirPath)
@@ -72,17 +64,9 @@ const loadTrainingData = async (dirPath: string, label: number) => {
       const imagePath = path.join(dirPath, file)
       const imageBuffer = fs.readFileSync(imagePath)
       const tensor = await processImage(imageBuffer)
-      console.log(tensor)
       return { tensor, label }
     }),
   )
-
-  // const data = files.map((file) => {
-  //   const imagePath = path.join(dirPath, file)
-  //   const imageBuffer = fs.readFileSync(imagePath)
-  //   const tensor = processImage(imageBuffer)
-  //   return { tensor, label }
-  // })
 
   return {
     images: data.map(({ tensor }) => tensor),
