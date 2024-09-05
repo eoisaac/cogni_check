@@ -1,6 +1,7 @@
 import * as tf from '@tensorflow/tfjs-node'
 import chalk from 'chalk'
 import * as fs from 'fs'
+import { Jimp } from 'jimp'
 import * as path from 'path'
 
 const PATHS = {
@@ -22,24 +23,66 @@ const TRAINING_CONFIG = {
   epochs: 20,
 }
 
-const processImage = (imageBuffer: Buffer) => {
-  return tf.node
-    .decodeImage(imageBuffer)
-    .resizeBilinear(TRAINING_CONFIG.imageDimension)
-    .toFloat()
-    .div(tf.scalar(255.0))
+const processImageWithJimp = async (imageBuffer: Buffer) => {
+  const image = await Jimp.fromBuffer(imageBuffer)
+  image.resize({
+    w: TRAINING_CONFIG.imageDimension[0],
+    h: TRAINING_CONFIG.imageDimension[1],
+  })
+
+  const pixels = new Uint8Array(image.bitmap.width * image.bitmap.height * 4)
+  image.bitmap.data.copy(pixels)
+
+  const normalizedPixels = Array.from(pixels).map((value) => value / 255.0)
+  return new Float32Array(normalizedPixels)
 }
+
+const convertToTensor = (
+  pixels: Float32Array,
+  width: number,
+  height: number,
+) => {
+  return tf.tensor3d(pixels, [height, width, 4], 'float32')
+}
+
+const processImage = async (imageBuffer: Buffer) => {
+  const pixels = await processImageWithJimp(imageBuffer)
+
+  return convertToTensor(
+    pixels,
+    TRAINING_CONFIG.imageDimension[0],
+    TRAINING_CONFIG.imageDimension[1],
+  )
+}
+
+// const processImage = (imageBuffer: Buffer) => {
+//   return tf.node
+//     .decodeImage(imageBuffer)
+//     .resizeBilinear(TRAINING_CONFIG.imageDimension)
+//     .toFloat()
+//     .div(tf.scalar(255.0))
+// }
 
 const loadTrainingData = async (dirPath: string, label: number) => {
   console.log(chalk.yellow(`📂 Loading images from ${dirPath}...`))
   const files = fs.readdirSync(dirPath)
 
-  const data = files.map((file) => {
-    const imagePath = path.join(dirPath, file)
-    const imageBuffer = fs.readFileSync(imagePath)
-    const tensor = processImage(imageBuffer)
-    return { tensor, label }
-  })
+  const data = await Promise.all(
+    files.map(async (file) => {
+      const imagePath = path.join(dirPath, file)
+      const imageBuffer = fs.readFileSync(imagePath)
+      const tensor = await processImage(imageBuffer)
+      console.log(tensor)
+      return { tensor, label }
+    }),
+  )
+
+  // const data = files.map((file) => {
+  //   const imagePath = path.join(dirPath, file)
+  //   const imageBuffer = fs.readFileSync(imagePath)
+  //   const tensor = processImage(imageBuffer)
+  //   return { tensor, label }
+  // })
 
   return {
     images: data.map(({ tensor }) => tensor),

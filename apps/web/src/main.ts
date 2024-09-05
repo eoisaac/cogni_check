@@ -39,7 +39,7 @@ const showToast = (message: string, duration = 3000) => {
 const validateFile = (file: File | null): string | null => {
   if (!file) return 'Nenhum arquivo selecionado'
   if (!IMAGE_FILE_TYPES.includes(file.type))
-    return `Tipo de arquivo inválido: ${file.type}`
+    return 'Tipo de arquivo inválido. Por favor, selecione um arquivo de imagem (png, jpeg, jpg)'
   return null
 }
 
