@@ -1,8 +1,7 @@
 {
   "dependencies": {
-    "@tensorflow/tfjs-node": "^4.21.0",
-    "canvas": "^2.11.2",
-    "chalk": "^5.3.0"
+    "@repo/model": "workspace:*",
+    "fastify": "^4.28.1"
   },
   "devDependencies": {
     "@repo/linting-config": "workspace:*",
@@ -10,12 +9,13 @@
     "tsx": "^4.19.0",
     "typescript": "^5.4.5"
   },
-  "main": "src/main.ts",
-  "name": "@repo/model",
+  "main": "index.js",
+  "name": "@repo/server",
   "scripts": {
+    "dev": "tsx src/main.ts --watch",
+    "dev:watch": "tsx src/main.ts --watch",
     "lint:check": "eslint --ext .ts && prettier --check \"src/**/*.ts\"",
-    "lint:fix": "eslint --ext .ts --fix && prettier --write \"src/**/*.ts\"",
-    "training": "tsx src/training/index.ts"
+    "lint:fix": "eslint --ext .ts --fix && prettier --write \"src/**/*.ts\""
   },
   "version": "1.0.0"
 }
